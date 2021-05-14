@@ -962,9 +962,9 @@ Ext.onReady(function(){
 
 
 	//예제 : emp 테이블 ExtJS에 연동해보기
-	Ext.create("Ext.panel.Panel",{
+	/*Ext.create("Ext.panel.Panel",{
 		width : 800,
-		height : 500,
+		height : 300,
 		renderTo : Ext.getBody(),
 		layout : 'fit',
 		items : [{
@@ -1002,10 +1002,10 @@ Ext.onReady(function(){
 				flex :1,
 				dataIndex : 'deptno'
 			}],
-			
-			store : {
+			store : Ext.create("Ext.data.BufferedStore",{
 				autoLoad : true,
-				
+				fields : ['empno','ename','job','hiredate','sal','comm','mgr','deptno'],
+			
 				proxy : {
 					
 					type : 'ajax',
@@ -1013,25 +1013,708 @@ Ext.onReady(function(){
 					reader : {
 						type : 'json',
 						// rootProperty : 'data' => 여기가 json파일에서 데이터의 키이름
-						rootProperty : 'empList'
+						rootProperty : 'empList',
+//						totalProperty : 'total'
 					}
 				}
+			})
+			
+			/*store : {
+				autoLoad : true,
+				fields : ['empno','ename','job','hiredate','sal','comm','mgr','deptno'],
+				pageSize : 5,
+				proxy : {
+					
+					type : 'ajax',
+					url : 'http://localhost/emp/selectEmpList',
+					reader : {
+						type : 'json',
+						// rootProperty : 'data' => 여기가 json파일에서 데이터의 키이름
+						rootProperty : 'empList',
+						totalProperty : 'total'
+					}
+				}
+			},
+			//bottom toolbar
+			bbar :{
+				xtype : 'pagingtoolbar',
+				//애니메이션 기능
+//				plugins : 'ux-slidingpager', 
+//				plugins : 'ux-progressbarpager',
+				displatInfo : true
 			}
+			
+			
 		}]
 		
 
-	})
+	})*/
 
 
 
 	//14강. 그리드 페이징 및 버퍼스토어
+	
+	
+	//15강. 그리드 에디팅 플러그인 적용하기
+//	Ext.create("Ext.panel.Panel",{
+//		width : 800,
+//		height : 500,
+//		renderTo : Ext.getBody(),
+//		layout : 'fit',
+//		items : [{
+//			xtype : 'grid',
+//			//데이터 에디트
+//			plugins : 'cellediting',
+//			//행 에디트
+////			plugins : 'rowediting',
+//			columns : [{
+//				text : '사원번호',
+//				flex :1,
+//				dataIndex : 'empno',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '이름',
+//				flex :1,
+//				dataIndex : 'ename',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '직책',
+//				flex :1,
+//				dataIndex : 'job',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '입사일자',
+//				flex :1,
+//				dataIndex : 'hiredate',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '급여',
+//				flex :1,
+//				dataIndex : 'sal',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '상여',
+//				flex :1,
+//				dataIndex : 'comm',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '선임번호',
+//				flex :1,
+//				dataIndex : 'mgr',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '부서번호',
+//				flex :1,
+//				dataIndex : 'deptno',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			}],
+//			/*store : Ext.create("Ext.data.BufferedStore",{
+//				autoLoad : true,
+//				fields : ['empno','ename','job','hiredate','sal','comm','mgr','deptno'],
+//			
+//				proxy : {
+//					
+//					type : 'ajax',
+//					url : 'http://localhost/emp/selectEmpList',
+//					reader : {
+//						type : 'json',
+//						// rootProperty : 'data' => 여기가 json파일에서 데이터의 키이름
+//						rootProperty : 'empList',
+////						totalProperty : 'total'
+//					}
+//				}
+//			})*/
+//			
+//			store : {
+//				autoLoad : true,
+//				autoSync : true,
+//				fields : ['empno','ename','job','hiredate','sal','comm','mgr','deptno'],
+//				pageSize : 5,
+//				proxy : {
+//					
+//					type : 'ajax',
+////					url : 'http://localhost/emp/updateEmp',
+//					api : {
+////						create : 'http://localhost/emp/updateEmp',
+//						read : 'http://localhost/emp/selectEmpList',
+//						update : 'http://localhost/emp/updateEmp'
+////						destroy :
+//					},
+//					
+//					writer : {
+//						type : 'json',
+//						rootProperty : 'empVo',
+//						
+//						writeAllFields : true,
+//						endoe : true
+//					},
+//					
+//					reader : {
+//						type : 'json',
+//						// rootProperty : 'data' => 여기가 json파일에서 데이터의 키이름
+//						rootProperty : 'empList',
+//						totalProperty : 'total'
+//					}
+//				}
+//			},
+//			
+//			//bottom toolbar
+//			bbar :{
+//				xtype : 'pagingtoolbar',
+//				//애니메이션 기능
+////				plugins : 'ux-slidingpager', 
+////				plugins : 'ux-progressbarpager',
+//				displatInfo : true
+//			}
+//			
+//			
+//		}]
+//		
+//
+//	})
+
+	//16강. 이벤트 리스너 알아보기
+//	Ext.create("Ext.panel.Panel",{
+//		width : 800,
+//		height : 500,
+//		renderTo : Ext.getBody(),
+//		layout : 'fit',
+//		items : [{
+//			xtype : 'grid',
+//			//중요! 눌른탭의 데잍가 다 들어가있음
+//			listeners : {
+//				cellclick : function(obj, td, cellIndex, record, tr, rowIndex, e, eOpts){
+//					console.log(record.getData());
+//					console.log(record.getData().empno);
+//					console.log(record.get("empno"));
+//				},
+//				//우클릭
+//				itemcontextmenu : function(obg, record, item, index, e, eOpts){
+//					console.log(record.get("empno"));
+//				}
+//			},
+//			//데이터 에디트
+//			plugins : 'cellediting',
+//			//행 에디트
+////			plugins : 'rowediting',
+//			columns : [{
+//				text : '사원번호',
+//				flex :1,
+//				dataIndex : 'empno',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '이름',
+//				flex :1,
+//				dataIndex : 'ename',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '직책',
+//				flex :1,
+//				dataIndex : 'job',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '입사일자',
+//				flex :1,
+//				dataIndex : 'hiredate',
+//				editor : {
+//					xtype : 'textfield'
+//				},
+//				//renderer : 포맷팅 할때 유용할듯?
+//				renderer : function(value){
+//					var date = new Date(value);
+//					var year = date.getFullYear();
+//					var month = (1+date.getMonth());
+//					month = month >= 10 ? month : '0' + month;
+//					var day = date.getDate();
+//					day = day >= 10 ? day : '0' +day;
+//					return year + "-" + month +"-" + day;
+//				}
+//			},{
+//				text : '급여',
+//				flex :1,
+//				dataIndex : 'sal',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '상여',
+//				flex :1,
+//				dataIndex : 'comm',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '선임번호',
+//				flex :1,
+//				dataIndex : 'mgr',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '부서번호',
+//				flex :1,
+//				dataIndex : 'deptno',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			}],
+//			/*store : Ext.create("Ext.data.BufferedStore",{
+//				autoLoad : true,
+//				fields : ['empno','ename','job','hiredate','sal','comm','mgr','deptno'],
+//			
+//				proxy : {
+//					
+//					type : 'ajax',
+//					url : 'http://localhost/emp/selectEmpList',
+//					reader : {
+//						type : 'json',
+//						// rootProperty : 'data' => 여기가 json파일에서 데이터의 키이름
+//						rootProperty : 'empList',
+////						totalProperty : 'total'
+//					}
+//				}
+//			})*/
+//			
+//			store : {
+//				autoLoad : true,
+//				autoSync : true,
+//				fields : ['empno','ename','job','hiredate','sal','comm','mgr','deptno'],
+//				pageSize : 5,
+//				proxy : {
+//					
+//					type : 'ajax',
+////					url : 'http://localhost/emp/updateEmp',
+//					api : {
+////						create : 'http://localhost/emp/updateEmp',
+//						read : 'http://localhost/emp/selectEmpList',
+//						update : 'http://localhost/emp/updateEmp'
+////						destroy :
+//					},
+//					
+//					writer : {
+//						type : 'json',
+//						rootProperty : 'empVo',
+//						
+//						writeAllFields : true,
+//						endoe : true
+//					},
+//					
+//					reader : {
+//						type : 'json',
+//						// rootProperty : 'data' => 여기가 json파일에서 데이터의 키이름
+//						rootProperty : 'empList',
+//						totalProperty : 'total'
+//					}
+//				}
+//			},
+//			dockedItems : [{
+//				xtype : 'toolbar',
+//				dock : 'top',
+//				items : [{
+//					text : 'dockedItems Toolbar'
+//				}]
+//			}],
+//			
+//			
+//			// 5toolbar position
+//			// tbar : top toolbar
+//			tbar : [{
+//				xtype : 'button',
+//				text : '추가',
+//				listeners : function(){
+//					
+//				}
+//				/*handler : function(btn){
+//					alert("버튼클릭");
+//				}*/
+//			},{
+//				autoLoad : true,
+////				listeners : {
+////					change : function(obj, newValue, oldValue, eOpts){
+////						console.log(newValue+","+oldValue);
+////					}
+////				},
+//				listeners : {
+//					cellclick : function(obj, td, cellIndex, record, tr, rowIndex, e, eOpts){
+//						console.log(record.getData());
+//					}
+//				},
+//				xtype : 'combo',
+//				displayField : 'key',
+//				valueFiled : 'value',
+//				queryMode : 'local',
+//				store : {
+//					fields : ['key','value'],
+//					data : [{
+//						key : '선택1',
+//						value : '값1'
+//					},{
+//						key : '선택2',
+//						value : '값2'
+//					},{
+//						key : '선택3',
+//						value : '값3'
+//					}]
+//				}
+//			}],
+//			// bbar : bottom toolbar
+////			bbar : [{
+////				xtype : 'button',
+////				text : 'bbar button'
+////			}],
+////			// lbar : left toolbar
+////			lbar : [{
+////				xtype : 'button',
+////				text : 'lbar button'
+////			}],
+////			// rbar : right toolbar
+////			rbar : [{
+////				xtype : 'button',
+////				text : 'rbar button'
+////			}],
+////			// fbar : footer toolbar
+////			fbar : [{
+////				xtype : 'button',
+////				text : 'fbar button'
+////			}]
+//			
+////			//bottom toolbar
+////			bbar :{
+////				xtype : 'pagingtoolbar',
+////				//애니메이션 기능
+//////				plugins : 'ux-slidingpager', 
+//////				plugins : 'ux-progressbarpager',
+////				displatInfo : true
+////			}
+//			
+//			
+//		}]
+//		
+//
+//	})
 
 
+	//17강. 그리드 CRUD
+//	Ext.create("Ext.panel.Panel",{
+//		width : 500,
+//		height : 500,
+//		renderTo : Ext.getBody(),
+//		layout : 'fit',
+//		items : [{
+//			xtype : 'grid',
+//			plugins : 'cellediting',
+//			columns : [{
+//				text : '사원번호',
+//				flex :1,
+//				dataIndex : 'empno',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//				
+//			},{
+//				text : '이름',
+//				flex :1,
+//				dataIndex : 'ename',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '직책',
+//				flex :1,
+//				dataIndex : 'job',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '입사일자',
+//				flex :1,
+//				dataIndex : 'hiredate',
+//				editor : {
+//					xtype : 'textfield'
+//				},
+//				renderer : function(value){
+//					var date = new Date(value);
+//					var year = date.getFullYear();
+//					var month = (1+date.getMonth());
+//					month = month >= 10 ? month : '0' + month;
+//					var day = date.getDate();
+//					day = day >= 10 ? day : '0' +day;
+//					return year + "-" + month +"-" + day;
+//				}
+//			},{
+//				text : '급여',
+//				flex :1,
+//				dataIndex : 'sal',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '상여',
+//				flex :1,
+//				dataIndex : 'comm',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '선임번호',
+//				flex :1,
+//				dataIndex : 'mgr',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '부서번호',
+//				flex :1,
+//				dataIndex : 'deptno',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			}],
+//			store : {
+//				autoLoad : true,
+//				fields : ['empno','ename','job','hiredate','sal','comm','mgr','deptno'],
+//				proxy : {
+//					type : 'ajax',
+//					api : {
+//						create : 'http://localhost/emp/insertEmp',
+//						read : 'http://localhost/emp/selectEmpList',
+//						update : 'http://localhost/emp/updateEmp',
+//						destroy : 'http://localhost/emp/deleteEmp'
+//					},
+//					reader : {
+//						type : 'json',
+//						rootProperty : 'empList',
+//						totalProperty : 'total'
+//					},
+//					writer : {
+//						type : 'json',
+//						rootProperty : 'empVo',
+//						writeAllFields : true,
+//						encode : true
+//					}
+//				}
+//			},
+//			tbar : [{
+//				xtype : 'button',
+//				text : '등록',
+//				handler : function(btn){
+//					//1. store 찾기
+//					// ExtJS - up(컴포넌트명 or itemId) / down
+////					console.log("AA",btn.up("grid"));
+//					var store = btn.up("grid").getStore();
+//					
+//					var newRec = {
+//						empno : "",
+//						ename : "",
+//						job : "",
+//						hiredate : "",
+//						sal : "",
+//						comm : "",
+//						mgr : "",
+//						deptno : ""
+//					}
+////					store.add(newRec);
+//					store.insert(0,newRec);
+//				}
+//			},{
+//				xtype : 'button',
+//				text : '삭제',
+//				handler : function(btn){
+////					console.log("BB",btn.up("grid").getSelection());
+//					var store = btn.up("grid").getStore();
+//					var removeRec = btn.up("grid").getSelection();
+//					store.remove(removeRec);
+//				}
+//			},{
+//				xtype : 'button',
+//				text : '적용',
+//				handler : function(btn){
+//					var store = btn.up("grid").getStore();
+////					store.load();
+////					store.reload();
+//					store.sync({
+//						callback : function(){
+//							store.reload();
+//						}
+//					});
+//				}
+//			}],
+//			bbar : {
+//				xtype : 'pagingtoolbar',
+//				displayInfo : true
+//			}
+//			
+//		}]
+//	})
 
 
+	//18강. Ajax 클래스 사용법 이해
+//	Ext.Ajax.request({
+//		url : 'http://localhost/emp/selectPagingEmployee',
+//		method : 'POST',
+//		params : {
+//			page : 1,
+//			pageSize : 5
+//		},
+//		success : function(response){
+//			console.log("success", Ext.decode(response.responseText));
+//		},
+//		failure : function(response){
+//			console.log(response);
+//		}
+//	});
 
-
-
+	Ext.create("Ext.panel.Panel",{
+		width : 500,
+		height : 500,
+		renderTo : Ext.getBody(),
+		layout : 'fit',
+		listeners : {
+			boxready : function(obj){
+				Ext.Ajax.request({
+					url : 'http://localhost/emp/selectPagingEmployee',
+					method : 'POST',
+					params : {
+						page : 1,
+						pageSize : 5
+					},
+					success : function(response){
+						var result = Ext.decode(response.responseText);
+						console.log("success", Ext.decode(response.responseText));
+						var store = obj.down("grid").getStore();
+						console.log("store", store);
+						// 데이터를 배열로 넣을 때
+						store.loadData(result.empList);
+					},
+					failure : function(response){
+						console.log(response);
+					}
+				});
+			}
+		},
+		items : [{
+			xtype : 'grid',
+			/*listeners : {
+				//중요!
+				boxready : function(obj){
+					Ext.Ajax.request({
+						url : 'http://localhost/emp/selectPagingEmployee',
+						method : 'POST',
+						params : {
+							page : 1,
+							pageSize : 5
+						},
+						success : function(response){
+							var result = Ext.decode(response.responseText);
+							console.log("success", Ext.decode(response.responseText));
+							var store = obj.getStore();
+							console.log("store", store);
+							// 데이터를 배열로 넣을 때
+							store.loadData(result.empList);
+						},
+						failure : function(response){
+							console.log(response);
+						}
+					});
+				}
+			},*/
+			plugins : 'cellediting',
+			columns : [{
+				text : '사원번호',
+				flex :1,
+				dataIndex : 'empno',
+				editor : {
+					xtype : 'textfield'
+				}
+				
+			},{
+				text : '이름',
+				flex :1,
+				dataIndex : 'ename',
+				editor : {
+					xtype : 'textfield'
+				}
+			},{
+				text : '직책',
+				flex :1,
+				dataIndex : 'job',
+				editor : {
+					xtype : 'textfield'
+				}
+			},{
+				text : '입사일자',
+				flex :1,
+				dataIndex : 'hiredate',
+				editor : {
+					xtype : 'textfield'
+				},
+				renderer : function(value){
+					var date = new Date(value);
+					var year = date.getFullYear();
+					var month = (1+date.getMonth());
+					month = month >= 10 ? month : '0' + month;
+					var day = date.getDate();
+					day = day >= 10 ? day : '0' +day;
+					return year + "-" + month +"-" + day;
+				}
+			},{
+				text : '급여',
+				flex :1,
+				dataIndex : 'sal',
+				editor : {
+					xtype : 'textfield'
+				}
+			},{
+				text : '상여',
+				flex :1,
+				dataIndex : 'comm',
+				editor : {
+					xtype : 'textfield'
+				}
+			},{
+				text : '선임번호',
+				flex :1,
+				dataIndex : 'mgr',
+				editor : {
+					xtype : 'textfield'
+				}
+			},{
+				text : '부서번호',
+				flex :1,
+				dataIndex : 'deptno',
+				editor : {
+					xtype : 'textfield'
+				}
+			
+			}],
+			store : {
+				fields : ['empno','ename','job','hiredate','sal','comm','mgr','deptno'],
+				data : []
+			}
+		}] 
+	})
 
 
 

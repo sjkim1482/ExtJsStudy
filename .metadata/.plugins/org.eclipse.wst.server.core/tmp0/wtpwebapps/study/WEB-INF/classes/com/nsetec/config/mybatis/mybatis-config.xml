@@ -7,6 +7,7 @@
 
   <typeAliases>
   	<typeAlias type="com.nsetec.model.EmpVo" alias="empVo" />
+  	<typeAlias type="com.nsetec.model.PageVo" alias="pageVo" />
   </typeAliases>
 
 
