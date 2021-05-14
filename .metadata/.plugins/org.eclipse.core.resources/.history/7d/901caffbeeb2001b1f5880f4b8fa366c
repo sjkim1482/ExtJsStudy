@@ -1,0 +1,8 @@
+package com.nsetec.service;
+
+import org.springframework.stereotype.Service;
+
+@Service("empService")
+public class EmpService implements EmpServiceI{
+
+}

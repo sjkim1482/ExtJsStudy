@@ -1,0 +1,5 @@
+package com.nsetec.model;
+
+public class UserVo {
+
+}

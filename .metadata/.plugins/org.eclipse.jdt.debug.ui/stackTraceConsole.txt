@@ -1,0 +1,27 @@
+Ext.create("Ext.container.Viewport",{
+		// layout : 'fit', 'border'
+		// layout2 : 'center', 'absolute', 'accordion', 'hbox/vbox', 'table'
+		layout : 'fit',
+		border : true,
+		items : [{
+			xtype : 'panel',
+			title : '부모패널',
+			layout : 'center',
+			items : [{
+				xtype : 'panel',
+				width : 300,
+				height : 300,
+				border : true,
+				title : '첫째 패널',
+				items :[{
+					xtype : 'textfield'
+				},{
+					xtype : 'textfield'
+				},{
+					xtype : 'button',
+					text : '로그인'
+				}]
+			}]
+		}]
+		
+	})

@@ -1,0 +1,35 @@
+{
+	"children" : [{
+		"text" : ".settings",
+		"expanded" : false,
+		"children" : [{
+			"text" : ".org",
+			"leaf" : true
+		}]
+	},{
+		"text" : "Tomcat v8.5 Server at localhost-config",
+		"expanded" : false,
+		"children" : [{
+			"text" : "catalina.policy",
+			"leaf" : true
+		},{
+			"text" : "catalina.properties",
+			"leaf" : true
+		},{
+			"text" : "context.xml",
+			"leaf" : true
+		},{
+			"text" : "server.xml",
+			"leaf" : true
+		},{
+			"text" : "tomcat-users.xml",
+			"leaf" : true
+		},{
+			"text" : "web.xml",
+			"leaf" : true
+		}]
+	},{
+		"text" : ".project",
+		"leaf" : true
+	}]
+}

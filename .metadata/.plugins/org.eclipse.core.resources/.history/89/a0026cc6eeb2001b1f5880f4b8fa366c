@@ -1,0 +1,5 @@
+package com.nsetec.repository;
+
+public class EmpDao implements EmpDaoI{
+
+}
