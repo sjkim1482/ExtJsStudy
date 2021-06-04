@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="NewWizardAction">
-		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.ui.wizards.new.file"/>
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.jdt.ui.wizards.NewClassCreationWizard"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
-			<item value="org.eclipse.ui.Basic"/>
 			<item value="org.eclipse.jdt.ui.java"/>
-			<item value="org.eclipse.jdt.ui.java/org.eclipse.jdt.debug.ui.java"/>
-			<item value="org.eclipse.wst.jsdt.ui.java"/>
-			<item value="org.eclipse.pde.PDE"/>
-			<item value="org.springframework.ide.eclipse.beans.ui.wizards.category"/>
-			<item value="org.eclipse.pde.userAssistance"/>
-			<item value="org.eclipse.wst.web.ui"/>
-			<item value="org.eclipse.jst.ws.ui.new"/>
-			<item value="org.eclipse.wst.XMLCategory"/>
 		</list>
 	</section>
 	<section name="ImportExportAction">
+		<item key="ImportExportPage.STORE_SELECTED_EXPORT_WIZARD_ID" value="org.eclipse.ui.wizards.export.ZipFile"/>
+		<list key="ImportExportPage.STORE_EXPANDED_EXPORT_CATEGORIES">
+			<item value="org.eclipse.ui.Basic"/>
+		</list>
 	</section>
 	<section name="FileSystemImportWizard">
 	</section>
@@ -27,5 +22,20 @@
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 	</section>
 	<section name="EditorSelectionDialog">
+	</section>
+	<section name="ZipFileExportWizard">
+		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
+		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
+		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\sjkim\Desktop\21.06.03.SpringBootBoard.zip"/>
+			<item value="C:\Users\sjkim\Desktop\21.06.01.SpringBootBoard.zip"/>
+			<item value="C:\Users\sjkim\Desktop\21.05.31.SpringBootBoard.zip"/>
+			<item value="C:\Users\sjkim\Desktop\21.05.28.SpringBootBoard.zip"/>
+			<item value="C:\Users\sjkim\Desktop\21.05.20.ExtJSBoard2.zip"/>
+			<item value="C:\Users\sjkim\Desktop\21.05.20.ExtJSBoard.zip"/>
+			<item value="C:\Users\sjkim\Desktop\21.05.18.ExtJSBoard.zip"/>
+			<item value="C:\Users\sjkim\Desktop\21.05.14.extjsStudy.zip"/>
+			<item value="C:\Users\sjkim\Desktop\extjs.zip"/>
+		</list>
 	</section>
 </section>

@@ -1,5 +1,0 @@
-package com.nsetec.repository;
-
-public interface EmpDaoI {
-
-}

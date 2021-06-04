@@ -1,0 +1,19 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "name": "CKEditorExtSix",
+        "requires": [
+            "Ext.ckeditor.CKeditor"
+        ],
+        "views": [
+            "TestViewport"
+        ]
+    },
+    "name": "Application",
+    "designerId": "application"
+}

@@ -1571,150 +1571,879 @@ Ext.onReady(function(){
 
 
 	//18강. Ajax 클래스 사용법 이해
-//	Ext.Ajax.request({
-//		url : 'http://localhost/emp/selectPagingEmployee',
-//		method : 'POST',
-//		params : {
-//			page : 1,
-//			pageSize : 5
+////	Ext.Ajax.request({
+////		url : 'http://localhost/emp/selectPagingEmployee',
+////		method : 'POST',
+////		params : {
+////			page : 1,
+////			pageSize : 5
+////		},
+////		success : function(response){
+////			console.log("success", Ext.decode(response.responseText));
+////		},
+////		failure : function(response){
+////			console.log(response);
+////		}
+////	});
+//
+//	Ext.create("Ext.panel.Panel",{
+//		width : 500,
+//		height : 500,
+//		renderTo : Ext.getBody(),
+//		//여러게 넣을떄는 이거 제거
+////		layout : 'fit',
+//		listeners : {
+//			//boxready 이거 중요! 
+//			boxready : function(obj){
+//				Ext.Ajax.request({
+//					url : 'http://localhost/emp/selectPagingEmployee',
+//					method : 'POST',
+//					params : {
+//						page : 1,
+//						pageSize : 5
+//					},
+//					success : function(response){
+//						var result = Ext.decode(response.responseText);
+//						console.log("S",result);
+//						console.log("success", Ext.decode(response.responseText));
+//						var store = obj.down("grid").getStore();
+//						console.log("store", store);
+//						// 데이터를 배열로 넣을 때
+//						store.loadData(result.empList);
+//						obj.down("panel").update(result.empCnt);
+//					},
+//					failure : function(response){
+//						console.log(response);
+//					}
+//				});
+//			}
 //		},
-//		success : function(response){
-//			console.log("success", Ext.decode(response.responseText));
-//		},
-//		failure : function(response){
-//			console.log(response);
-//		}
-//	});
+//		items : [{
+//			xtype : 'panel',
+//			width : 500,
+//			heigth : 200,
+//			html : "<h2>test</h2>"
+//		},{
+//			xtype : 'grid',
+//			whith : 500,
+//			heigth : 300,
+//			/*listeners : {
+//				//중요!
+//				boxready : function(obj){
+//					Ext.Ajax.request({
+//						url : 'http://localhost/emp/selectPagingEmployee',
+//						method : 'POST',
+//						params : {
+//							page : 1,
+//							pageSize : 5
+//						},
+//						success : function(response){
+//							var result = Ext.decode(response.responseText);
+//							console.log("success", Ext.decode(response.responseText));
+//							var store = obj.getStore();
+//							console.log("store", store);
+//							// 데이터를 배열로 넣을 때
+//							store.loadData(result.empList);
+//						},
+//						failure : function(response){
+//							console.log(response);
+//						}
+//					});
+//				}
+//			},*/
+//			plugins : 'cellediting',
+//			columns : [{
+//				text : '사원번호',
+//				flex :1,
+//				dataIndex : 'empno',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//				
+//			},{
+//				text : '이름',
+//				flex :1,
+//				dataIndex : 'ename',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '직책',
+//				flex :1,
+//				dataIndex : 'job',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '입사일자',
+//				flex :1,
+//				dataIndex : 'hiredate',
+//				editor : {
+//					xtype : 'textfield'
+//				},
+//				renderer : function(value){
+//					var date = new Date(value);
+//					var year = date.getFullYear();
+//					var month = (1+date.getMonth());
+//					month = month >= 10 ? month : '0' + month;
+//					var day = date.getDate();
+//					day = day >= 10 ? day : '0' +day;
+//					return year + "-" + month +"-" + day;
+//				}
+//			},{
+//				text : '급여',
+//				flex :1,
+//				dataIndex : 'sal',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '상여',
+//				flex :1,
+//				dataIndex : 'comm',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '선임번호',
+//				flex :1,
+//				dataIndex : 'mgr',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			},{
+//				text : '부서번호',
+//				flex :1,
+//				dataIndex : 'deptno',
+//				editor : {
+//					xtype : 'textfield'
+//				}
+//			
+//			}],
+//			store : {
+//				fields : ['empno','ename','job','hiredate','sal','comm','mgr','deptno'],
+//				data : []
+//			}
+//		}] 
+//	})
 
+
+//	//19강. 세로/가로 막대 차트 그래프 만들기
+//	/**
+//		polar / cartesian
+//		
+//		cartesian : X/Y
+//		
+//		polar : X/Y (X) (x,y 좌표가 없는 나머지 그래프들)
+//		
+//	 */
+//	 //cartesian
+//	 Ext.create("Ext.panel.Panel",{
+//		width : 500,
+//		height : 500,
+//		renderTo : Ext.getBody(),
+//		layout : 'fit',
+//		items : [{
+//			xtype : 'cartesian',
+//			flipXY : true,
+////			innerPadding : 50,
+////			insetPadding : 50,
+//			//과목별 성적
+//			store : {
+//				fields : ['score','subject'],
+//				data : [{
+//					subject : '국어',
+//					score : 80
+//				},{
+//					subject : '영어',
+//					score : 50
+//				},{
+//					subject : '수학',
+//					score : 90
+//				},{
+//					subject : '과학',
+//					score : 100
+//				},{
+//					subject : '사회',
+//					score : 60
+//				}]
+//			},
+//			//아래 2개가 기본으로 딸려감
+//			//x,y 축 내용
+//			axes : [{ 
+//				type : 'numeric3d',  
+////				position : 'left',
+//				position : 'bottom',
+//				title : '(점)'
+//			},{
+//				type : 'category3d',
+//				position : 'left'
+////				position : 'bottom'
+//			}],
+//			//어떤 차트를 쓰고 어떤식의 속성을 정의할건지
+//			series : {
+//				type : 'bar3d',
+//				xField : 'subject',
+//				yField : 'score',
+//				label : {
+//					field : 'score',
+//					display : 'insideEnd'
+//				}
+//			}
+//			
+//			
+//			
+//		}]
+//	})
+
+	//19강. 누적 막대 그래프 만들기
+//	Ext.create("Ext.panel.Panel",{
+//		width : 500,
+//		height : 500,
+//		renderTo : Ext.getBody(),
+//		layout : 'fit',
+//		bbar : [{
+//			xtype : 'button',
+//			text : '그룹버튼',
+//			handler : function(btn){
+//				var chart = btn.up("panel").down("cartesian");
+////				console.log("log",chart.getSeries()[0].setStacked(false))
+//				chart.getSeries()[0].setStacked(false);
+//				chart.redraw();
+//			}
+//		},{
+//			xtype : 'button',
+//			text : '스택버튼',
+//			handler : function(btn){
+//				var chart = btn.up("panel").down("cartesian");
+//				console.log("log",chart.getSeries()[0].setStacked(false))
+//				chart.getSeries()[0].setStacked(true);
+//				chart.redraw();
+//			}
+//		}],
+//		items : [{
+//			xtype : 'cartesian',
+//			//가로로 출력할때 선언
+////			flipXY : true,
+////			innerPadding : 50,
+////			insetPadding : 50,
+//			//과목별 성적
+//			store : {
+//				fields : ['age','vote1','vote2'],
+//				data : [{
+//					age : '20대',
+//					vote1 : 65.8,
+//					vote2 : 33.7
+//				},{
+//					age : '30대',
+//					vote1 : 66.5,
+//					vote2 : 33.1
+//				},{
+//					age : '40대',
+//					vote1 : 55.6,
+//					vote2 : 44.1
+//				},{
+//					age : '50대',
+//					vote1 : 37.4,
+//					vote2 : 62.5
+//				},{
+//					age : '60대',
+//					vote1 : 27.5,
+//					vote2 : 72.3
+//				}]
+//			},
+//			//아래 2개가 기본으로 딸려감
+//			//x,y 축 내용
+//			axes : [{ 
+//				type : 'numeric3d',  
+//				position : 'left',
+////				position : 'bottom',
+//				title : '(%)'
+//			},{
+//				type : 'category3d',
+////				position : 'left'
+//				position : 'bottom'
+//			}],
+//			//어떤 차트를 쓰고 어떤식의 속성을 정의할건지
+//			series : {
+//				type : 'bar3d',
+//				//하나의 그래프를 두개로 나눌떄
+//				stacked : false,
+//				xField : 'age',
+//				yField : ['vote2','vote1'],
+//				label : {
+//					field : ['vote1','vote2'],
+//					display : 'insideEnd'
+//				}
+//			}
+//			
+//			
+//			
+//		}]
+//	})
+	
+	
+	//19강. 선형 차트 만들기
+//	Ext.create("Ext.panel.Panel",{
+//		width : 500,
+//		height : 500,
+//		renderTo : Ext.getBody(),
+//		layout : 'fit',
+//		items : [{
+//			xtype : 'cartesian',
+//			innnerPadding : 30,
+//			store : {
+//				fields : ['month','weight'],
+//				data : [{
+//					month : '1월',
+//					weight : 90
+//				},{
+//					month : '2월',
+//					weight : 86
+//				},{
+//					month : '3월',
+//					weight : 82.3
+//				},{
+//					month : '4월',
+//					weight : 78.8
+//				},{
+//					month : '5월',
+//					weight : 80.2
+//				}]
+//			},
+//			axes : [{
+//				type : 'numeric',
+//				minimum : 0,
+//				maximum : 100,
+//				position : 'left',
+//				title : '(KG)'
+//			},{
+//				type : 'category',
+//				position : 'bottom'
+//			}],
+//			series : {
+//				type : 'line',
+//				smooth : true,
+//				marker : {
+//					radius : 4
+//				},
+//				xField : 'month',
+//				yField : 'weight',
+//				label : {
+//					field : 'weight',
+//					display : 'insideEnd'
+//				}
+//			}
+//		}],
+//		
+//		
+//	})
+
+//	Ext.create("Ext.panel.Panel",{
+//		width : 500,
+//		height : 500,
+//		renderTo : Ext.getBody(),
+//		layout : 'fit',
+//		bbar : [{
+//			xtype : 'button',
+//			text : '그룹버튼',
+//			handler : function(btn){
+//				var chart = btn.up("panel").down("cartesian");
+////				console.log("log",chart.getSeries()[0].setStacked(false))
+//				chart.getSeries()[0].setStacked(false);
+//				chart.redraw();
+//			}
+//		},{
+//			xtype : 'button',
+//			text : '스택버튼',
+//			handler : function(btn){
+//				var chart = btn.up("panel").down("cartesian");
+//				console.log("log",chart.getSeries()[0].setStacked(false))
+//				chart.getSeries()[0].setStacked(true);
+//				chart.redraw();
+//			}
+//		}],
+//		items : [{
+//			xtype : 'cartesian',
+//			innerPadding : 30,
+//			store : {
+//				fields : ['age','vote1','vote2'],
+//				data : [{
+//					age : '20대',
+//					vote1 : 65.8,
+//					vote2 : 33.7
+//				},{
+//					age : '30대',
+//					vote1 : 66.5,
+//					vote2 : 33.1
+//				},{
+//					age : '40대',
+//					vote1 : 55.6,
+//					vote2 : 44.1
+//				},{
+//					age : '50대',
+//					vote1 : 37.4,
+//					vote2 : 62.5
+//				},{
+//					age : '60대',
+//					vote1 : 27.5,
+//					vote2 : 72.3
+//				}]
+//			},
+//			//아래 2개가 기본으로 딸려감
+//			//x,y 축 내용
+//			axes : [{ 
+//				type : 'numeric3d',  
+//				position : 'left',
+//				minimum : 0,
+//				maximum : 100,
+////				position : 'bottom',
+//				title : '(%)'
+//			},{
+//				type : 'category3d',
+////				position : 'left'
+//				position : 'bottom'
+//			}],
+//			//어떤 차트를 쓰고 어떤식의 속성을 정의할건지
+//			series : [{
+//				type : 'line',
+//				//부드럽게
+//				smooth : true,
+//				//마커 표시
+//				marker : {
+//					radius : 4
+//				},
+//				xField : 'age',
+//				yField : 'vote1',
+//				label : {
+//					field : 'vote1',
+//					display : 'insideEnd'
+//				}
+//			},{
+//				type : 'line',
+//				smooth : true,
+//				marker : {
+//					radius : 4
+//				},
+//				xField : 'age',
+//				yField : 'vote2',
+//				label : {
+//					field : 'vote2',
+//					display : 'insideEnd'
+//				}
+//			}]
+//			
+//			
+//			
+//		}]
+//	})
+
+
+
+//	//19강. 영역 차트 만들기
+//	Ext.create("Ext.panel.Panel",{
+//		width : 500,
+//		height : 500,
+//		renderTo : Ext.getBody(),
+//		layout : 'fit',
+//		
+//		items : [{
+//			xtype : 'cartesian',
+//			legend : {
+//				docked : 'bottom',
+//			},
+//			innerPadding : 30,
+//			store : {
+//				fields : ['year','seoul','busan','gyunggi','jeju'],
+//				data : [{
+//					year : 2014,
+//					seoul : 10143164,
+//					busan : 3526648,
+//					gyunggi : 12245960,
+//					jeju : 594623
+//				},{
+//					year : 2015,
+//					seoul : 10104515,
+//					busan : 3517898,
+//					gyunggi : 12366711,
+//					jeju : 608325
+//				},{
+//					year : 2016,
+//					seoul : 10018537,
+//					busan : 3513361,
+//					gyunggi : 12536474,
+//					jeju : 625451
+//				},{
+//					year : 2017,
+//					seoul : 9930478,
+//					busan : 3496779,
+//					gyunggi : 12728620,
+//					jeju : 642388
+//				}]
+//			},
+//			//아래 2개가 기본으로 딸려감
+//			//x,y 축 내용
+//			axes : [{ 
+//				type : 'numeric',  
+//				position : 'left',
+//				minimum : 0,
+//				title : '지역별인구수'
+//			},{
+//				type : 'category',
+////				position : 'left'
+//				position : 'bottom'
+//			}],
+//			//어떤 차트를 쓰고 어떤식의 속성을 정의할건지
+//			series : [{
+//				type : 'area',
+//				style : {
+//					opacity : 0.5
+//				},
+//				marker : {
+//					radius : 4
+//				},
+//				highlightCfg : {
+//					scaling : 1.5
+//				},
+//				tooltip : {
+//					trackMouse : true,
+//					renderer : function(tooltip,record){
+//						tooltip.setHtml(record.get("seoul")+"명");
+//					}
+//				},
+//				xField : 'year',
+//				yField : 'seoul',
+//				title : '서울'
+//			},{
+//				type : 'area',
+//				style : {
+//					opacity : 0.5
+//				},
+//				marker : {
+//					radius : 4
+//				},
+//				highlightCfg : {
+//					scaling : 1.5
+//				},
+//				tooltip : {
+//					trackMouse : true,
+//					renderer : function(tooltip,record){
+//						tooltip.setHtml(record.get("busan")+"명");
+//					}
+//				},
+//				xField : 'year',
+//				yField : 'busan',
+//				title : '부산'
+//			},{
+//				type : 'area',
+//				style : {
+//					opacity : 0.5
+//				},
+//				marker : {
+//					radius : 4
+//				},
+//				highlightCfg : {
+//					scaling : 1.5
+//				},
+//				tooltip : {
+//					trackMouse : true,
+//					renderer : function(tooltip,record){
+//						tooltip.setHtml(record.get("gyunggi")+"명");
+//					}
+//				},
+//				xField : 'year',
+//				yField : 'gyunggi',
+//				title : '경기'
+//			},{
+//				type : 'area',
+//				style : {
+//					opacity : 0.5
+//				},
+//				marker : {
+//					radius : 4
+//				},
+//				highlightCfg : {
+//					scaling : 1.5
+//				},
+//				tooltip : {
+//					trackMouse : true,
+//					renderer : function(tooltip,record){
+//						tooltip.setHtml(record.get("jeju")+"명");
+//					}
+//				},
+//				xField : 'year',
+//				yField : 'jeju',
+//				title : '제주'
+//			}]
+//			
+//			
+//			
+//		}]
+//	})
+
+	//19강. 분산/분포 차트 만들기
 	Ext.create("Ext.panel.Panel",{
 		width : 500,
 		height : 500,
 		renderTo : Ext.getBody(),
 		layout : 'fit',
-		listeners : {
-			boxready : function(obj){
-				Ext.Ajax.request({
-					url : 'http://localhost/emp/selectPagingEmployee',
-					method : 'POST',
-					params : {
-						page : 1,
-						pageSize : 5
-					},
-					success : function(response){
-						var result = Ext.decode(response.responseText);
-						console.log("success", Ext.decode(response.responseText));
-						var store = obj.down("grid").getStore();
-						console.log("store", store);
-						// 데이터를 배열로 넣을 때
-						store.loadData(result.empList);
-					},
-					failure : function(response){
-						console.log(response);
-					}
-				});
-			}
-		},
+		
 		items : [{
-			xtype : 'grid',
-			/*listeners : {
-				//중요!
-				boxready : function(obj){
-					Ext.Ajax.request({
-						url : 'http://localhost/emp/selectPagingEmployee',
-						method : 'POST',
-						params : {
-							page : 1,
-							pageSize : 5
-						},
-						success : function(response){
-							var result = Ext.decode(response.responseText);
-							console.log("success", Ext.decode(response.responseText));
-							var store = obj.getStore();
-							console.log("store", store);
-							// 데이터를 배열로 넣을 때
-							store.loadData(result.empList);
-						},
-						failure : function(response){
-							console.log(response);
-						}
-					});
-				}
-			},*/
-			plugins : 'cellediting',
-			columns : [{
-				text : '사원번호',
-				flex :1,
-				dataIndex : 'empno',
-				editor : {
-					xtype : 'textfield'
-				}
-				
-			},{
-				text : '이름',
-				flex :1,
-				dataIndex : 'ename',
-				editor : {
-					xtype : 'textfield'
-				}
-			},{
-				text : '직책',
-				flex :1,
-				dataIndex : 'job',
-				editor : {
-					xtype : 'textfield'
-				}
-			},{
-				text : '입사일자',
-				flex :1,
-				dataIndex : 'hiredate',
-				editor : {
-					xtype : 'textfield'
-				},
-				renderer : function(value){
-					var date = new Date(value);
-					var year = date.getFullYear();
-					var month = (1+date.getMonth());
-					month = month >= 10 ? month : '0' + month;
-					var day = date.getDate();
-					day = day >= 10 ? day : '0' +day;
-					return year + "-" + month +"-" + day;
-				}
-			},{
-				text : '급여',
-				flex :1,
-				dataIndex : 'sal',
-				editor : {
-					xtype : 'textfield'
-				}
-			},{
-				text : '상여',
-				flex :1,
-				dataIndex : 'comm',
-				editor : {
-					xtype : 'textfield'
-				}
-			},{
-				text : '선임번호',
-				flex :1,
-				dataIndex : 'mgr',
-				editor : {
-					xtype : 'textfield'
-				}
-			},{
-				text : '부서번호',
-				flex :1,
-				dataIndex : 'deptno',
-				editor : {
-					xtype : 'textfield'
-				}
-			
-			}],
+			xtype : 'cartesian',
+			innerPadding : 50,
 			store : {
-				fields : ['empno','ename','job','hiredate','sal','comm','mgr','deptno'],
-				data : []
-			}
-		}] 
+				fields : ['title','count','time'],
+				data : [{
+					title : 'ExtJS 6 로 만들어본 WebOS',
+					time : 623,
+					count : 268
+				},{
+					title : 'ExtJS 6 란?',
+					time : 584,
+					count : 124
+				},{
+					title : 'ExtJS 6 문법 및 레이아웃 이해(1)',
+					time : 582,
+					count : 65
+				},{
+					title : 'ExtJS 6 GPL 다운로드 및 환경설정',
+					time : 510,
+					count : 79
+				},{
+					title : 'ExtJS 6 테마변경 및 onLoad 이해',
+					time : 493,
+					count : 72
+				},{
+					title : 'ExtJS 6 버튼종류 알아보기',
+					time : 478,
+					count : 42
+				},{
+					title : 'ExtJS 6 API Document 보는법',
+					time : 420,
+					count : 43
+				},{
+					title : 'ExtJS 6 추가 레이아웃 알아보기',
+					time : 345,
+					count : 51
+				}]
+			},
+			//아래 2개가 기본으로 딸려감
+			//x,y 축 내용
+			axes : [{ 
+				type : 'numeric',  
+				position : 'bottom',
+				fields : 'count'
+			},{ 
+				type : 'numeric',  
+				position : 'left',
+				fields : 'time'
+			}],
+			//어떤 차트를 쓰고 어떤식의 속성을 정의할건지
+			series : [{
+				type : 'scatter',
+				xField : 'count',
+				yField : 'time',
+				highlightCfg : {
+					scale : 2
+				},
+				tooltip : {
+					trackMouse : true,
+					renderer : function(tooltip,record){
+						tooltip.setHtml(record.get("title")+"<br>조회수:"+record.get("count")+"<br>시청시간(분) : "+record.get("time"));
+						//제목
+						
+						//조회수
+						
+						//시청시간(분)
+					}
+				}
+			}]
+			
+			
+			
+		}]
 	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//	//27강. 데이터 바인딩 및 MVVM 구조이해
+//	//Ext.define("")
+//	Ext.create("Ext.panel.Panel",{
+//		width : 500,
+//		height : 500,
+//		renderTo : Ext.getBody(),
+//		layout : 'fit',
+//		items : [{
+//			xtype : 'sampleGrid',
+////			tbar : [{
+////				xtype : 'button',
+////				text : '데이터로드',
+////				handler : function(btn){
+////					var grid = btn.up("grid");
+////					var store = grid.getStore();
+////					store.load();
+////				}
+////			}],
+////			columns : [{
+////				text : '사원번호',
+////				flex :1,
+////				dataIndex : 'empno',
+////			
+////				
+////			},{
+////				text : '이름',
+////				flex :1,
+////				dataIndex : 'ename',
+////			
+////			},{
+////				text : '직책',
+////				flex :1,
+////				dataIndex : 'job',
+////			
+////			},{
+////				text : '입사일자',
+////				flex :1,
+////				dataIndex : 'hiredate',
+////			
+////				renderer : function(value){
+////					var date = new Date(value);
+////					var year = date.getFullYear();
+////					var month = (1+date.getMonth());
+////					month = month >= 10 ? month : '0' + month;
+////					var day = date.getDate();
+////					day = day >= 10 ? day : '0' +day;
+////					return year + "-" + month +"-" + day;
+////				}
+////			},{
+////				text : '급여',
+////				flex :1,
+////				dataIndex : 'sal',
+////			
+////			},{
+////				text : '상여',
+////				flex :1,
+////				dataIndex : 'comm',
+////			
+////			},{
+////				text : '선임번호',
+////				flex :1,
+////				dataIndex : 'mgr',
+////			
+////			},{
+////				text : '부서번호',
+////				flex :1,
+////				dataIndex : 'deptno',
+////			
+////			}],
+////			store : {
+////				autoLoad : true,
+////				fields : ['empno','ename','job','hiredate','sal','comm','mgr','deptno'],
+////				proxy : {
+////					type : 'ajax',
+//////					url : 'http://localhost/emp/selectPagingEmployee',
+////					url : 'http://localhost/emp/selectEmpList',
+////					reander : {
+////						type : 'json',
+////						rootProperty : 'empList'
+////					}
+////				}
+////			}
+//		}]
+//	})
+
+
+	//28강. 컴포넌트 변경 이해
+//	Ext.create("Ext.container.Viewport",{
+//		layout : 'border',
+//		items : [{
+//			xtype : 'panel',
+//			title : '컴포넌트 변경',
+//			region : 'north',
+//			border : true,
+//			items : [{
+//				xtype : 'button',
+//				text : '그리드',
+//				handler : function(btn){
+////					console.log("존재하니?",btn.up("viewport").down("component[region=center]"));
+//					var page = btn.up("viewport").down("component[region=center]");
+//					page.removeAll(true);
+//					page.add(Ext.apply({
+//						xtype : 'gridSample'
+//					}));
+//				}
+//			},{
+//				xtype : 'button',
+//				text : '버튼',
+//				handler : function(btn){
+//					console.log("존재하니?",btn.up("viewport").down("component[region=center]"));
+//					var page = btn.up("viewport").down("component[region=center]");
+//					page.removeAll(true);
+//					page.add(Ext.apply({
+//						xtype : 'buttonSample'
+//					}));
+//				}
+//			},{
+//				xtype : 'button',
+//				text : 'HTML',
+//				handler : function(btn){
+//					console.log("존재하니?",btn.up("viewport").down("component[region=center]"));
+//					var page = btn.up("viewport").down("component[region=center]");
+//					page.removeAll(true);
+//					page.add(Ext.apply({
+//						xtype : 'htmlSample'
+//					}));
+//				}
+//			}]
+//		},{
+//			xtype : 'panel',
+//			width : 200,
+//			region : 'west'
+//		},{
+//			xtype : 'panel',
+//			flex : 1,
+//			region : 'center',
+//			border : true
+//		}]
+//	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

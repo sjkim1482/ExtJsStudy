@@ -1,27 +1,39 @@
-Ext.create("Ext.container.Viewport",{
-		// layout : 'fit', 'border'
-		// layout2 : 'center', 'absolute', 'accordion', 'hbox/vbox', 'table'
-		layout : 'fit',
-		border : true,
-		items : [{
-			xtype : 'panel',
-			title : '부모패널',
-			layout : 'center',
-			items : [{
-				xtype : 'panel',
-				width : 300,
-				height : 300,
-				border : true,
-				title : '첫째 패널',
-				items :[{
-					xtype : 'textfield'
-				},{
-					xtype : 'textfield'
-				},{
-					xtype : 'button',
-					text : '로그인'
-				}]
-			}]
-		}]
+frm.submit({
+
+				url: '/board/insertPost',
+				method: "post",
+				
+				params: {
+					board_no: board_no,
+					title: title,
+					cont: cont
+				},
+
+				success: function(frm, response) {
+					console.log("등록 성공!");
+					console.log("response", response);
+					console.log("response", Ext.decode(response.response.responseText));
+					// 컨트롤러에서 반환한 json 데이터를 변환하여 변수에 담아줌
+					
+					var insertCnt = Ext.decode(response.response.responseText).insertCnt;
+					// 등록에 성공시 작성한 게시글로 이동시키기위해 게시글번호(기본키)를 받아옴
+					post_no = Ext.decode(response.response.responseText).max_post_no;
+					console.log("insertCnt", insertCnt);
+					if (insertCnt == 1) {
+						alert("게시글이 생성되었습니다.");
+						var page = btn.up("viewport").down("component[region=center]");
+						page.removeAll(true);
+						page.add(Ext.apply({
+							xtype: 'postView'
+						}));
+					} else {
+						alert("게시글 생성오류");
 		
-	})
+					}
+				},
+				failure: function(frm, response) {
+
+					console.log("failure : ", response);
+				}
+
+			});

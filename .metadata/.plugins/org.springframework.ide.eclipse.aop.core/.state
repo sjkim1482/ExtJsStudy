@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
 <aop-project name="study"/>
+<aop-project name="ExtJSBoard"/>
+<aop-project name="EditorTest"/>
+<aop-project name="SpringBootBoard2"/>
+<aop-project name="SpringBootBoard"/>
+<aop-project name="SpringBootStudy"/>
 </aop-reference-model>
